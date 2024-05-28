@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -8,21 +8,21 @@ import * as L from 'leaflet';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnInit {
 
-  // @ts-ignore
-  private map;
+  map: any;
 
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
-    });
+  ngOnInit() {
+    this.configMap();
   }
 
-  constructor() { }
-
-  ngAfterViewInit(): void {
-    this.initMap();
+  configMap() {
+  this.map = L.map('map', {
+    center:[40.4258686, 86.9080655],
+    zoom: 6,
+  });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(this.map);
   }
 }
